@@ -5,7 +5,7 @@ const Form = () => {
     return (
         <section style={{
             background: `url(${bgImg})`
-        }} className='text-center '>
+        }} className='text-center mt-24 '>
             <div>
                 <h4 className=' text-xl text-primary font-bold py-4'>Contact Us</h4>
                 <h2 className='text-3xl text-white'>Stay connected with us</h2>

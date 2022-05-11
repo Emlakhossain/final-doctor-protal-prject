@@ -8,7 +8,7 @@ const Banner = () => {
             background: `url(${bg})`,
             height: 800,
         }}>
-            <div class="hero min-h-screen px-12 ">
+            <div class="hero min-h-screen ">
                 <div class="hero-content flex-col lg:flex-row-reverse">
                     <img src={chair} class="max-w-sm rounded-lg shadow-2xl" />
                     <div >
