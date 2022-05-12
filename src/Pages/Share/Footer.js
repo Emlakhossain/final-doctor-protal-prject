@@ -5,27 +5,26 @@ const Footer = () => {
     return (
         <footer style={{
             background: `url(${footerImg})`
-        }} class="">
-            <div className='footer p-10 text-black justify-between  items-center h-96  text-neutral-content'>
+        }} >
+            <div className='footer p-10 text-black justify-between  items-center h-96  '>
                 <div>
                     <span class="footer-title">Services</span>
-                    <a class="link link-hover">Branding</a>
-                    <a class="link link-hover">Design</a>
-                    <a class="link link-hover">Marketing</a>
-                    <a class="link link-hover">Advertisement</a>
+                    <a class="link link-hover">Emergency Checkup</a>
+                    <a class="link link-hover">Monthly Checkup</a>
+                    <a class="link link-hover">Weekly Checkup</a>
+                    <a class="link link-hover">Deep Checkup</a>
                 </div>
                 <div>
-                    <span class="footer-title">Company</span>
-                    <a class="link link-hover">About us</a>
-                    <a class="link link-hover">Contact</a>
-                    <a class="link link-hover">Jobs</a>
-                    <a class="link link-hover">Press kit</a>
+                    <span class="footer-title">ORAL HEALTH</span>
+                    <a class="link link-hover">Fluoride Treatment</a>
+                    <a class="link link-hover">Cavity Filling</a>
+                    <a class="link link-hover">Teath Whitening</a>
+
                 </div>
                 <div>
-                    <span class="footer-title">Legal</span>
-                    <a class="link link-hover">Terms of use</a>
-                    <a class="link link-hover">Privacy policy</a>
-                    <a class="link link-hover">Cookie policy</a>
+                    <span class="footer-title">OUR ADDRESS</span>
+                    <a class="link link-hover">New York - 101010 Hudson</a>
+
                 </div>
             </div>
             <div className='text-center py-6'>
