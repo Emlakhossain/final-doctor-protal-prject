@@ -1,21 +1,35 @@
 import React from 'react';
 import { useNavigate } from "react-router-dom";
-import { useSignInWithGoogle } from 'react-firebase-hooks/auth';
+import { useCreateUserWithEmailAndPassword, useSignInWithGoogle } from 'react-firebase-hooks/auth';
 import auth from '../../firebase.init';
 import { useForm } from "react-hook-form";
+import Loading from '../Share/Loading';
 
 const Login = () => {
-    const [signInWithGoogle, user, loading, error] = useSignInWithGoogle(auth);
+    const [signInWithGoogle, gUser, gLoading, gError] = useSignInWithGoogle(auth);
     const navigate = useNavigate()
+    const [
+        createUserWithEmailAndPassword,
+        user,
+        loading,
+        error,
+    ] = useCreateUserWithEmailAndPassword(auth);
 
     const { register, formState: { errors }, handleSubmit } = useForm();
-    if (user) {
+    let signInError;
+    if (gUser || user) {
         console.log(user)
         navigate('/')
     }
-
+    if (gLoading || loading) {
+        return <Loading></Loading>
+    }
+    if (gError || error) {
+        signInError = <p className='text-red-500'><small>{gError?.message || error?.message}</small></p>
+    }
     const onSubmit = data => {
         console.log(data)
+        createUserWithEmailAndPassword(data.email, data.password)
         navigate('/')
     };
     return (
@@ -73,7 +87,7 @@ const Login = () => {
                             </label>
                         </div>
 
-
+                        {signInError}
                         <input className='btn btn-outline center w-full max-w-xs' type="submit" value='Login' />
                     </form>
                     <div className='divider'>OR</div>
