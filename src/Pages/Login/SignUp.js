@@ -1,41 +1,63 @@
 import React from 'react';
 import { Link, useNavigate } from "react-router-dom";
-import { useSignInWithEmailAndPassword, useSignInWithGoogle } from 'react-firebase-hooks/auth';
+import { useCreateUserWithEmailAndPassword, useSignInWithGoogle, useUpdateProfile } from 'react-firebase-hooks/auth';
 import auth from '../../firebase.init';
 import { useForm } from "react-hook-form";
 import Loading from '../Share/Loading';
 
-const Login = () => {
+const SignUp = () => {
     const [signInWithGoogle, gUser, gLoading, gError] = useSignInWithGoogle(auth);
     const navigate = useNavigate()
     const [
-        signInWithEmailAndPassword,
+        createUserWithEmailAndPassword,
         user,
         loading,
         error,
-    ] = useSignInWithEmailAndPassword(auth);
-
+    ] = useCreateUserWithEmailAndPassword(auth);
+    const [updateProfile, updating, updateError] = useUpdateProfile(auth);
     const { register, formState: { errors }, handleSubmit } = useForm();
     let signInError;
     if (gUser || user) {
         navigate('/')
     }
-    if (gLoading || loading) {
+    if (gLoading || loading || updating) {
         return <Loading></Loading>
     }
-    if (gError || error) {
+    if (gError || error || updateError) {
         signInError = <p className='text-red-500'><small>{gError?.message || error?.message}</small></p>
     }
-    const onSubmit = data => {
-        signInWithEmailAndPassword(data.email, data.password)
+    const onSubmit = async data => {
+        await createUserWithEmailAndPassword(data.email, data.password)
+        await updateProfile({ displayName: data.name })
         navigate('/appoinment')
+
     };
     return (
         <div className='flex h-screen justify-center items-center '>
             <div class="card w-96 bg-base-100 shadow-xl">
                 <div class="card-body ">
-                    <h2 class="text-center font-bold">Login</h2>
+                    <h2 class="text-center font-bold">Sign Up</h2>
                     <form onSubmit={handleSubmit(onSubmit)}>
+                        <div class="form-control w-full max-w-xs">
+                            <label class="label">
+                                <span class="label-text">Name</span>
+                            </label>
+                            <input type="text"
+                                {...register("name", {
+
+                                    required: {
+                                        value: true,
+                                        message: 'name is required'
+                                    }
+
+                                })}
+                                placeholder="Enter Name"
+                                class="input input-bordered w-full max-w-xs" />
+                            <label class="label">
+                                {errors.name?.type === 'required' && <span class="label-text-alt text-red-500">{errors.name.message}</span>}
+
+                            </label>
+                        </div>
                         <div class="form-control w-full max-w-xs">
                             <label class="label">
                                 <span class="label-text">Email</span>
@@ -86,9 +108,9 @@ const Login = () => {
                         </div>
 
                         {signInError}
-                        <input className='btn btn-outline center w-full max-w-xs' type="submit" value='Login' />
+                        <input className='btn btn-outline center w-full max-w-xs' type="submit" value='Sign Up' />
                     </form>
-                    <p><small>Are you new Doctors Chamber? <Link className='text-primary' to="/signup">Create an Account</Link></small></p>
+                    <p><small>Already have an account ? <Link className='text-primary' to="/login">Please login</Link></small></p>
                     <div className='divider'>OR</div>
                     <button
                         onClick={() => signInWithGoogle()}
@@ -101,4 +123,4 @@ const Login = () => {
     );
 };
 
-export default Login;
+export default SignUp;

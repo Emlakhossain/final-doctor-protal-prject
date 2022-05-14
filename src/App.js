@@ -4,6 +4,7 @@ import About from './Pages/About/About';
 import Appionment from './Pages/Appionment/Appionment';
 import Home from './Pages/Home/Home';
 import Login from './Pages/Login/Login';
+import SignUp from './Pages/Login/SignUp';
 import PageNotFound from './Pages/PageNotFound/PageNotFound';
 import Navbar from './Pages/Share/Navbar';
 
@@ -16,6 +17,7 @@ function App() {
         <Route path='/about' element={<About></About>}></Route>
         <Route path='/appoinment' element={<Appionment></Appionment>}></Route>
         <Route path='/login' element={<Login></Login>}></Route>
+        <Route path='/signup' element={<SignUp></SignUp>}></Route>
         <Route path='*' element={<PageNotFound></PageNotFound>}></Route>
       </Routes>
     </div>
