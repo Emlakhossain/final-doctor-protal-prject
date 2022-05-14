@@ -27,6 +27,7 @@ const Footer = () => {
 
                 </div>
             </div>
+            <div className='divider'></div>
             <div className='text-center py-6'>
                 <p>Copyright 2022 All Rights Reserved</p>
             </div>
