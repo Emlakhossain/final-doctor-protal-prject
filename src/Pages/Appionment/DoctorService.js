@@ -1,6 +1,6 @@
 import React from 'react';
 
-const DoctorService = ({ service, setTretment }) => {
+const DoctorService = ({ service, setTreatment }) => {
     const { name, slots } = service;
     return (
         <div class="card w-96 bg-base-100 shadow-xl my-6">
@@ -16,9 +16,9 @@ const DoctorService = ({ service, setTretment }) => {
                 <p>{slots.length} {slots.length > 1 ? 'spaces' : 'space'} Available</p>
                 <div class="card-actions justify-center">
 
-                    <label for="booking-modal"
+                    <label htmlFor="booking-modal"
                         disabled={slots.length === 0}
-                        onClick={() => setTretment(service)}
+                        onClick={() => setTreatment(service)}
                         class="btn btn-sm btn-secondary w-3/4 text-white ">Book Appoinment</label>
                 </div>
             </div>
