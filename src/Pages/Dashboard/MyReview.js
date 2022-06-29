@@ -2,7 +2,7 @@ import React from 'react';
 
 const MyReview = () => {
     return (
-        <div className='bg-primary'>
+        <div className='mt-5'>
             <h2>My Review</h2>
         </div>
     );

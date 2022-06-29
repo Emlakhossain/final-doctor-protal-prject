@@ -21,7 +21,6 @@ const SignUp = () => {
 
     let signInError;
     if (token) {
-
         navigate('/appoinment')
     }
     if (gLoading || loading || updating) {

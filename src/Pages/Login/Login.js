@@ -4,6 +4,8 @@ import { useSignInWithEmailAndPassword, useSignInWithGoogle } from 'react-fireba
 import auth from '../../firebase.init';
 import { useForm } from "react-hook-form";
 import Loading from '../Share/Loading';
+import useToken from '../../hooks/useToken';
+import { useEffect } from 'react';
 
 const Login = () => {
     const [signInWithGoogle, gUser, gLoading, gError] = useSignInWithGoogle(auth);
@@ -14,16 +16,18 @@ const Login = () => {
         loading,
         error,
     ] = useSignInWithEmailAndPassword(auth);
-
+    const [token] = useToken(gUser || user);
     const { register, formState: { errors }, handleSubmit } = useForm();
     let location = useLocation();
 
     let from = location.state?.from?.pathname || "/";
     let signInError;
+    useEffect(() => {
+        if (token) {
+            navigate(from, { replace: true });
+        }
+    }, [token, from, navigate])
 
-    if (gUser || user) {
-        navigate(from, { replace: true });
-    }
     if (gLoading || loading) {
         return <Loading></Loading>
     }
