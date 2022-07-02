@@ -1,15 +1,26 @@
 import React from 'react';
+import { useEffect } from 'react';
+import { useState } from 'react';
 import { useForm } from "react-hook-form";
+import { useQuery } from 'react-query';
+import Loading from '../../Pages/Share/Loading';
 
 const AddDoctor = () => {
 
     const { register, formState: { errors }, handleSubmit } = useForm();
-
+    const [services, setServices, isLoading] = useState([]);
+    useEffect(() => {
+        fetch('http://localhost:5000/service')
+            .then(res => res.json())
+            .then(data => setServices(data))
+    }, [])
     const onSubmit = async data => {
         console.log(data)
 
-
     };
+    if (isLoading) {
+        return <Loading></Loading>
+    }
     return (
         <div className=''>
             <h2 className='text-2xl font-bold text-center mt-5'>Add New Doctor</h2>
@@ -59,26 +70,44 @@ const AddDoctor = () => {
 
                     </label>
                 </div>
+
+
                 <div class="form-control w-full max-w-xs">
                     <label class="label">
                         <span class="label-text">Specialty</span>
                     </label>
-                    <input type="text"
-                        {...register("Specialty", {
+                    <select {...register("specialty")} class="select w-full max-w-xs">
+                        {
+                            services.map(service => <option
+                                key={service._id}
+                                value={service.name}
+                            >{service.name}</option>)
+                        }
+                    </select>
+
+
+                </div>
+                <div class="form-control w-full max-w-xs">
+                    <label class="label">
+                        <span class="label-text">Photo</span>
+                    </label>
+                    <input type="file"
+                        {...register("image", {
 
                             required: {
                                 value: true,
-                                message: 'Specialization is required'
+                                message: 'Image is required'
                             }
+
                         })}
-                        placeholder="Specialty"
+                        placeholder="Enter Name"
                         class="input input-bordered w-full max-w-xs" />
                     <label class="label">
-                        {errors.password?.type === 'required' && <span class="label-text-alt text-red-500">{errors.password.message}</span>}
-                        {errors.password?.type === 'minLength' && <span class="label-text-alt text-red-500">{errors.password.message}</span>}
+                        {errors.name?.type === 'required' && <span class="label-text-alt text-red-500">{errors.name.message}</span>}
 
                     </label>
                 </div>
+
                 <input className='btn btn-outline center w-full max-w-xs' type="submit" value='ADD' />
             </form>
         </div>
