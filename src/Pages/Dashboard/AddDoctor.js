@@ -3,20 +3,61 @@ import { useEffect } from 'react';
 import { useState } from 'react';
 import { useForm } from "react-hook-form";
 import { useQuery } from 'react-query';
+import { toast } from 'react-toastify';
 import Loading from '../../Pages/Share/Loading';
 
 const AddDoctor = () => {
 
     const { register, formState: { errors }, handleSubmit } = useForm();
-    const [services, setServices, isLoading] = useState([]);
+    const [services, setServices, isLoading, reset] = useState([]);
+    const imageStorageKey = 'aa25aed6fac450e4f45b5a831685aae6';
     useEffect(() => {
         fetch('http://localhost:5000/service')
             .then(res => res.json())
             .then(data => setServices(data))
-    }, [])
-    const onSubmit = async data => {
-        console.log(data)
+    }, []);
 
+    const onSubmit = async data => {
+        const image = data.image[0];
+        const formData = new FormData();
+        formData.append('image', image);
+        fetch(`https://api.imgbb.com/1/upload?key=${imageStorageKey}`, {
+            method: 'POST',
+            body: formData
+        })
+            .then(res => res.json())
+            .then(result => {
+
+                if (result.success) {
+                    const img = result.data.url;
+                    const doctor = {
+                        name: data.name,
+                        email: data.email,
+                        specialty: data.specialty,
+                        img: img
+                    }
+                    fetch('http://localhost:5000/doctor', {
+                        method: 'POST',
+                        headers: {
+                            'content-type': 'application/json',
+                            authorization: `Bearer ${localStorage.getItem('accessToken')}`
+                        },
+                        body: JSON.stringify(doctor)
+                    })
+                        .then(res => res.json())
+                        .then(inserted => {
+                            if (inserted.insertedId) {
+                                toast.success('Successfully added a Doctor')
+                                reset()
+                            }
+                            else {
+                                toast.error('You do not add doctor')
+                            }
+                            console.log('doctor', inserted)
+                        })
+                }
+                console.log('Success:', result);
+            })
     };
     if (isLoading) {
         return <Loading></Loading>
@@ -76,7 +117,7 @@ const AddDoctor = () => {
                     <label class="label">
                         <span class="label-text">Specialty</span>
                     </label>
-                    <select {...register("specialty")} class="select w-full max-w-xs">
+                    <select {...register("specialty")} class="select w-full max-w-xs input-bordered">
                         {
                             services.map(service => <option
                                 key={service._id}
