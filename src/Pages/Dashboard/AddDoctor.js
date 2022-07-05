@@ -8,8 +8,8 @@ import Loading from '../../Pages/Share/Loading';
 
 const AddDoctor = () => {
 
-    const { register, formState: { errors }, handleSubmit } = useForm();
-    const [services, setServices, isLoading, reset] = useState([]);
+    const { register, formState: { errors }, handleSubmit, reset } = useForm();
+    const [services, setServices, isLoading] = useState([]);
     const imageStorageKey = 'aa25aed6fac450e4f45b5a831685aae6';
     useEffect(() => {
         fetch('http://localhost:5000/service')
@@ -66,7 +66,7 @@ const AddDoctor = () => {
         <div className=''>
             <h2 className='text-2xl font-bold text-center mt-5'>Add New Doctor</h2>
 
-            <form onSubmit={handleSubmit(onSubmit)}>
+            <form className='items-center ml-20' onSubmit={handleSubmit(onSubmit)}>
                 <div class="form-control w-full max-w-xs">
                     <label class="label">
                         <span class="label-text">Name</span>
