@@ -2,6 +2,7 @@
     {
         "_id": 1,
         "name": "Teeth Orthodontics",
+        "price": 99,
         "slots": [
             "09.00AM - 09:30AM",
             "09.30AM - 10:00AM",
@@ -16,6 +17,7 @@
     {
         "_id": 2,
         "name": "Cosmetic Dentistry",
+        "price": 99,
         "slots": [
             "09.00AM - 09:30AM",
             "09.30AM - 10:00AM",
@@ -30,6 +32,7 @@
     {
         "_id": 3,
         "name": "Teeth Cleaning",
+        "price": 99,
         "slots": [
             "09.00AM - 09:30AM",
             "09.30AM - 10:00AM",
@@ -44,6 +47,7 @@
     {
         "_id": 4,
         "name": "Teeth Orthodontics",
+        "price": 99,
         "slots": [
             "09.00AM - 09:30AM",
             "09.30AM - 10:00AM",
@@ -58,6 +62,7 @@
     {
         "_id": 5,
         "name": "Teeth Orthodontics",
+        "price": 99,
         "slots": [
             "09.00AM - 09:30AM",
             "09.30AM - 10:00AM",
@@ -72,6 +77,7 @@
     {
         "_id": 6,
         "name": "Teeth Orthodontics",
+        "price": 99,
         "slots": [
             "09.00AM - 09:30AM",
             "09.30AM - 10:00AM",

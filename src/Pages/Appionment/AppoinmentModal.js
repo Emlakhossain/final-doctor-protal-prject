@@ -5,7 +5,7 @@ import auth from '../../firebase.init';
 import { toast } from 'react-toastify';
 
 const AppoinmentModal = ({ treatment, date, setTreatment }) => {
-    const { name, slots, email, _id, phone } = treatment;
+    const { name, slots, email, _id, phone, price } = treatment;
     const [user, loading, error] = useAuthState(auth);
     const formateDate = format(date, 'pp');
     const handleFormSubmit = event => {
@@ -17,6 +17,7 @@ const AppoinmentModal = ({ treatment, date, setTreatment }) => {
             treatment: name,
             date: formateDate,
             slot,
+            price,
             patient: user.email,
             patientName: user.displayName
             // phone: event.target.phone.value
@@ -59,6 +60,7 @@ const AppoinmentModal = ({ treatment, date, setTreatment }) => {
                         </select>
                         <input type="text" disabled name="Name" value={user?.displayName || ''} class="input input-bordered w-full max-w-xs" />
                         <input type="text" name='Email' disabled value={user?.email || ''} class="input input-bordered w-full max-w-xs" />
+                        <input type="text" name='Price' disabled value={price} class="input input-bordered w-full max-w-xs" />
                         <input type="text" name='Phone' placeholder='phone Number' class="input input-bordered w-full max-w-xs" />
                         <input type="submit" value="submit" class="btn btn-secondary w-full max-w-xs" />
 
