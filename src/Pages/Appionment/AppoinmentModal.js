@@ -7,7 +7,8 @@ import { toast } from 'react-toastify';
 const AppoinmentModal = ({ treatment, date, setTreatment }) => {
     const { name, slots, email, _id, phone, price } = treatment;
     const [user, loading, error] = useAuthState(auth);
-    const formateDate = format(date, 'pp');
+    const formateDate = format(date, 'PP');
+    console.log(formateDate)
     const handleFormSubmit = event => {
         event.preventDefault();
         const slot = event.target.slot.value;
@@ -25,13 +26,13 @@ const AppoinmentModal = ({ treatment, date, setTreatment }) => {
         fetch('http://localhost:5000/booking', {
             method: 'POST',
             headers: {
-                'content-type': 'application/json'
+                'content-type': 'application/json',
+                'authorization': `Bearer ${localStorage.getItem('accessToken')}`
             },
             body: JSON.stringify(booking)
         })
             .then(res => res.json())
             .then(data => {
-                console.log(data)
                 if (data.success) {
                     toast(`Appoinment is set,${formateDate} at ${slot}`)
                 }
