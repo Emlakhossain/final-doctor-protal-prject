@@ -4,8 +4,11 @@ import { useQuery } from 'react-query';
 import Loading from '../Share/Loading';
 import { loadStripe } from '@stripe/stripe-js';
 import { Elements } from '@stripe/react-stripe-js';
-import InjectedCheckoutForm from './InjectedCheckoutForm';
+import CheckoutForm from './CheckoutForm';
+
+
 const stripePromise = loadStripe('pk_test_51LNh3pAHvWzeWZEX4cHkT0SRKCjiJo8XTPaaXctDvxSblidlpbx41XrdRK0kBCOBz8G6mfnZOLOpqhlGZbUTscAC002Y13SXhT');
+
 const Payment = () => {
     const { id } = useParams();
     const url = `http://localhost:5000/booking/${id}`;
@@ -27,14 +30,12 @@ const Payment = () => {
                     <p>Your Treatment:{appoinment.treatment} </p>
                     <p>Your Booking date:{appoinment.date} Slot: {appoinment.slot} </p>
                     <p>Please Pay USD; {appoinment.price}</p>
-                    <button className='btn btn-success btn-sm'>By Now</button>
-
                 </div>
             </div>
             <div class="card flex-shrink-0 w-50 max-w-md shadow-2xl bg-base-100 mx-auto ">
                 <div class="card-body">
                     <Elements stripe={stripePromise}>
-                        <InjectedCheckoutForm />
+                        <CheckoutForm appoinment={appoinment} />
                     </Elements>
                 </div>
             </div>
