@@ -7,7 +7,7 @@ const MyUsers = () => {
     const [users, setUsers, isLoading, refetch] = useState([]);
 
     useEffect(() => {
-        fetch('http://localhost:5000/user', {
+        fetch('https://fathomless-dusk-01494.herokuapp.com/user', {
             method: 'GET',
             headers: {
                 authorization: `Bearer ${localStorage.getItem('accessToken')}`

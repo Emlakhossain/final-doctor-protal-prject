@@ -9,7 +9,7 @@ const AvailableAppoinment = ({ date }) => {
     const [services, setServices] = useState([]);
     const [treatment, setTreatment] = useState(null)
     // const formattedDate = format(date, 'pp');
-    // const { data: services, isLoading } = useQuery(['available'], () => fetch(`http://localhost:5000/available?date=${formattedDate}`)
+    // const { data: services, isLoading } = useQuery(['available'], () => fetch(`https://fathomless-dusk-01494.herokuapp.com/available?date=${formattedDate}`)
     //     .then(res => res.json())
     // )
 
@@ -17,7 +17,7 @@ const AvailableAppoinment = ({ date }) => {
     //     return <Loading></Loading>
     // }
     useEffect(() => {
-        fetch(`http://localhost:5000/service`)
+        fetch(`https://fathomless-dusk-01494.herokuapp.com/service`)
             .then(res => res.json())
             .then(data => setServices(data))
     }, [])

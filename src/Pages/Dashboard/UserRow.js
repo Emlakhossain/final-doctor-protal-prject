@@ -5,7 +5,7 @@ const UserRow = ({ user, refetch }) => {
     const { name, email, roll } = user;
 
     const handleMakeAdmin = () => {
-        fetch(`http://localhost:5000/user/admin/${email}`, {
+        fetch(`https://fathomless-dusk-01494.herokuapp.com/user/admin/${email}`, {
             method: 'PUT',
             headers: {
                 authorization: `Bearer ${localStorage.getItem('accessToken')}`

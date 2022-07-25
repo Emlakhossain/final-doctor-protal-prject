@@ -12,7 +12,7 @@ const AddDoctor = () => {
     const [services, setServices, isLoading] = useState([]);
     const imageStorageKey = 'aa25aed6fac450e4f45b5a831685aae6';
     useEffect(() => {
-        fetch('http://localhost:5000/service')
+        fetch('https://fathomless-dusk-01494.herokuapp.com/service')
             .then(res => res.json())
             .then(data => setServices(data))
     }, []);
@@ -36,7 +36,7 @@ const AddDoctor = () => {
                         specialty: data.specialty,
                         img: img
                     }
-                    fetch('http://localhost:5000/doctor', {
+                    fetch('https://fathomless-dusk-01494.herokuapp.com/doctor', {
                         method: 'POST',
                         headers: {
                             'content-type': 'application/json',

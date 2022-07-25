@@ -23,7 +23,7 @@ const AppoinmentModal = ({ treatment, date, setTreatment }) => {
             patientName: user.displayName
             // phone: event.target.phone.value
         }
-        fetch('http://localhost:5000/booking', {
+        fetch('https://fathomless-dusk-01494.herokuapp.com/booking', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json',
